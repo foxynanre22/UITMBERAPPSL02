@@ -9,6 +9,6 @@ namespace UITMBER.Services.Application
     public interface IApplicationService
     {
         Task<bool> SendApplication(SendApplicationRequest input);
-        //GetMyApplication();
+        Task<List<GetApplicationResponse>> GetMyApplications();
     }
 }

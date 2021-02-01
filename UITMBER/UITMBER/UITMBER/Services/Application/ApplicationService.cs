@@ -20,5 +20,13 @@ namespace UITMBER.Services.Application
 
             return true;
         }
+
+        public async Task<List<GetApplicationResponse>> GetMyApplications()
+        {
+            var uri = $"{Settings.SERVER_ENDPOINT}/Application/GetMyApplications";
+
+            return await _requestService.GetAsync<List<GetApplicationResponse>>(uri);
+        }
+
     }
 }
