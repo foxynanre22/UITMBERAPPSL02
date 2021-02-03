@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UITMBER.Models.Car;
 using UITMBER.Services.Authentication;
+using UITMBER.Services.Car;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -10,6 +12,7 @@ namespace UITMBER.ViewModels
     public class AboutViewModel : BaseViewModel
     {
         public IAuthenticationService _authService => DependencyService.Get<IAuthenticationService>();
+        public ICarService _carService => DependencyService.Get<ICarService>();
 
         public AboutViewModel()
         {

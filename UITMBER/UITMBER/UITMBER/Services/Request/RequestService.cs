@@ -74,12 +74,33 @@ namespace UITMBER.Services.Request
 
         public Task<TResult> PutAsync<TResult>(string uri, TResult data)
         {
-            throw new NotImplementedException();
+            return PutAsync<TResult, TResult>(uri, data);
         }
 
-        public Task<TResult> PutAsync<TRequest, TResult>(string uri, TRequest data)
+        public async Task<TResult> PutAsync<TRequest, TResult>(string uri, TRequest data)
         {
-            throw new NotImplementedException();
+            HttpClient client = CreateHttpClient();
+
+            var serializedData = JsonConvert.SerializeObject(data);
+
+            var response = await client.PutAsync(uri, new StringContent(serializedData, Encoding.UTF8, "application/json"));
+
+            await HandleResponse(response);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<TResult>(content);
+        }
+
+        public async Task<TResult> DeleteAsync<TResult>(string uri)
+        {
+            HttpClient client = CreateHttpClient();
+
+            var response = await client.DeleteAsync(uri);
+
+            await HandleResponse(response);
+
+            return JsonConvert.DeserializeObject<TResult>(response.ReasonPhrase);
         }
 
         // This method must be in a class in a platform project, even if

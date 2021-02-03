@@ -5,6 +5,7 @@ using UITMBER.Services;
 using UITMBER.Views;
 using UITMBER.Services.Request;
 using UITMBER.Services.Authentication;
+using UITMBER.Services.Car;
 
 namespace UITMBER
 {
@@ -38,7 +39,7 @@ namespace UITMBER
 
             DependencyService.Register<IRequestService, RequestService>();
             DependencyService.Register<IAuthenticationService, AuthenticationService>();
-            
+            DependencyService.Register<ICarService, CarService>();
         }
 
     }
