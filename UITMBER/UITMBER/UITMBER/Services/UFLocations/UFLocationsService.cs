@@ -27,6 +27,12 @@ namespace UITMBER.Services.UFLocations
 
             return data;
         }
-        
+        public async Task<bool> DeleteLocation(long id)
+        {
+            var uri = $"{Settings.SERVER_ENDPOINT}/UFLocations/DeleteLocation/{id}";
+
+            return await _requestService.DeleteAsync<bool>(uri);
+        }
+
     }
 }
