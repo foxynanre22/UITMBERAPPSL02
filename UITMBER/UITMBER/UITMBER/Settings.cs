@@ -11,7 +11,7 @@ namespace UITMBER
     /// </summary>
     public static class Settings
     {
-        public const string SERVER_ENDPOINT = "https://dev.wsiz.edu.pl";
+        public const string SERVER_ENDPOINT = "http://localhost:61435";
 
 
         private static ISettings AppSettings
