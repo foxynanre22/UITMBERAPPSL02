@@ -5,6 +5,7 @@ using UITMBER.Services;
 using UITMBER.Views;
 using UITMBER.Services.Request;
 using UITMBER.Services.Authentication;
+using UITMBER.Services.Orders;
 
 using UITMBER.Services.Register;
 using UITMBER.Services.Location;
@@ -49,6 +50,7 @@ namespace UITMBER
 
             DependencyService.Register<IRegisterService, RegisterService>();
             DependencyService.Register<ILocationService, LocationService>();
+
             
 
             DependencyService.Register<IOrderService, OrderService>();
