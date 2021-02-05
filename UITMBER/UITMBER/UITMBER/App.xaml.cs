@@ -43,8 +43,10 @@ namespace UITMBER
             DependencyService.Register<IRequestService, RequestService>();
             DependencyService.Register<IAuthenticationService, AuthenticationService>();
             DependencyService.Register<IOrderService, OrderService>();
+
             DependencyService.Register<IApplicationService, ApplicationService>();
             DependencyService.Register<IDriversService, DriverService>();
+
         }
 
     }
