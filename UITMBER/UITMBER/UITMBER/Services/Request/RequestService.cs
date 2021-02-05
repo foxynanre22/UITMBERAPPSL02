@@ -90,6 +90,7 @@ namespace UITMBER.Services.Request
             var content = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<TResult>(content);
+
         }
 
         public async Task<TResult> DeleteAsync<TResult>(string uri)
@@ -101,6 +102,8 @@ namespace UITMBER.Services.Request
             await HandleResponse(response);
 
             return JsonConvert.DeserializeObject<TResult>(response.ReasonPhrase);
+
+
         }
 
         // This method must be in a class in a platform project, even if
