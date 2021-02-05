@@ -17,8 +17,7 @@ using UITMBER.Services.Orders;
 using UITMBER.Services.Register;
 using UITMBER.Services.Location;
 
-using UITMBER.Services.Orders;
-using UITMBER.Services.Application
+using UITMBER.Services.Application;
 using UITMBER.Services.Client.Drivers;
 
 

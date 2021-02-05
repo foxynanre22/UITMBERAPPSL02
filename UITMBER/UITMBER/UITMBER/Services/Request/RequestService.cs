@@ -21,19 +21,7 @@ namespace UITMBER.Services.Request
             return client;
         }
 
-        public async Task<TResult> DeleteAsync<TResult>(string uri)
-        {
-            HttpClient client = CreateHttpClient();
-
-            var response = await client.DeleteAsync(uri);
-
-            await HandleResponse(response);
-
-            var content = await response.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<TResult>(content);
-
-        }
+   
         private async Task HandleResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
@@ -106,6 +94,8 @@ namespace UITMBER.Services.Request
 
         }
 
+    
+
         public async Task<TResult> DeleteAsync<TResult>(string uri)
         {
             HttpClient client = CreateHttpClient();
@@ -114,8 +104,9 @@ namespace UITMBER.Services.Request
 
             await HandleResponse(response);
 
-            return JsonConvert.DeserializeObject<TResult>(response.ReasonPhrase);
+            var content = await response.Content.ReadAsStringAsync();
 
+            return JsonConvert.DeserializeObject<TResult>(content);
 
         }
 
