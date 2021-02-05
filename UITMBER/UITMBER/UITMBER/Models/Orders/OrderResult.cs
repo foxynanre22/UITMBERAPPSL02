@@ -8,6 +8,10 @@ namespace UITMBER.Models.Orders
     public class OrderResult
     {
         public long UserId { get; set; }
+
+        //Trzeba dodać w api
+        public long IdOrder { get; set; }
+
         public long DriverId { get; set; }
         public double? ClientRating { get; set; }
         public double? DriverRating { get; set; }
