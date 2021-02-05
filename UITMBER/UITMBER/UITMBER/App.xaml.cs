@@ -5,6 +5,7 @@ using UITMBER.Services;
 using UITMBER.Views;
 using UITMBER.Services.Request;
 using UITMBER.Services.Authentication;
+using UITMBER.Services.UFLocations;
 
 using UITMBER.Services.Car;
 
@@ -52,6 +53,9 @@ namespace UITMBER
             DependencyService.Register<IRequestService, RequestService>();
             DependencyService.Register<IAuthenticationService, AuthenticationService>();
 
+            DependencyService.Register<IUFLocationsService, UFLocationsService>();
+
+
             DependencyService.Register<ICarService, CarService>();
 
             DependencyService.Register<IRegisterService, RegisterService>();
@@ -63,6 +67,7 @@ namespace UITMBER
 
             DependencyService.Register<IApplicationService, ApplicationService>();
             DependencyService.Register<IDriversService, DriverService>();
+
 
         }
 
