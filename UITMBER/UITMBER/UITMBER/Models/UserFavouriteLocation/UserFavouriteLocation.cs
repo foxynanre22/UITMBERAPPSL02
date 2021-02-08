@@ -18,5 +18,15 @@ namespace UITMBER.Models.UserFavouriteLocation
         public double Long { get; set; }
         public string Name { get; set; }
 
+        public LocationDto ToLocationDto()
+        {
+            return new LocationDto
+            {
+                UserId = this.UserId,
+                Name = this.Name,
+                Lat = this.Lat,
+                Long = this.Long
+            };
+        }
     }
 }
