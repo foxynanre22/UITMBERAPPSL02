@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UITMBER.Views.MyCarPage"
+             Title="{Binding Title}">
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
+            <Image Source="{Binding Photo}" HeightRequest="300" />
+            <Label Text="Color:" FontAttributes="Bold" FontSize="Large" />
+            <Label Text="{Binding Color}" FontSize="Medium"/>
+            <Label Text="Model:" FontAttributes="Bold" FontSize="Large" />
+            <Label Text="{Binding Model}" FontSize="Medium"/>
+            <Label Text="Year:" FontAttributes="Bold" FontSize="Large" />
+            <Label Text="{Binding Year}" FontSize="Medium"/>
+            <Label Text="Manufacturer:" FontAttributes="Bold" FontSize="Large" />
+            <Label Text="{Binding Manufacturer}" FontSize="Medium"/>
+            <Label Text="PlateNo:" FontAttributes="Bold" FontSize="Large" />
+            <Label Text="{Binding PlateNo}" FontSize="Medium"/>
+            <Label Text="Type:" FontAttributes="Bold" FontSize="Large" />
+            <Label Text="{Binding Type}" FontSize="Medium"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

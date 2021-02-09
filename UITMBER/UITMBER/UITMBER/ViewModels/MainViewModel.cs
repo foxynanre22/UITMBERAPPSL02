@@ -89,7 +89,7 @@ namespace UITMBER.ViewModels
                     DesiredAccuracy = GeolocationAccuracy.Default
                 });
 
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                //var location = await Geolocation.GetLastKnownLocationAsync();
 
                 if (location != null)
                 {

@@ -30,10 +30,41 @@ namespace UITMBER.Services.Car
 
         public async Task<List<CarDto>> GetMyCars()
         {
-            var url = $"{Settings.SERVER_ENDPOINT}/Car/GetMyCars";
-            var data = await _requestService.GetAsync<List<CarDto>>(url);
+            //var url = $"{Settings.SERVER_ENDPOINT}/Car/GetMyCars";
+            //var data = await _requestService.GetAsync<List<CarDto>>(url);
+            List<CarDto> sd = new List<CarDto>();
 
-            return data;
+
+            var result = new CarDto
+            {
+                Color = "Grin",
+                Id = 1,
+                IsActive = true,
+                Manufacturer = "BlaBlacar",
+                Model = "Tesla MS",
+                Photo = "https://upload.wikimedia.org/wikipedia/commons/0/0c/2017_Tesla_Model_X_front_5.27.18.jpg",
+                PlateNo = "Jeden",
+                Type = CarType.Seater7,
+                UserId = 2,
+                Year = 2020
+            };
+            var res2ult = new CarDto
+            {
+                Color = "blue",
+                Id = 2,
+                IsActive = true,
+                Manufacturer = "BlaBlacar",
+                Model = "Tesla MX",
+                Photo = "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/tesla-model-x__664102-620x465x70.jpg",
+                PlateNo = "Dwa",
+                Type = CarType.Seater7,
+                UserId = 2,
+                Year = 2020
+            };
+            sd.Add(result);
+            sd.Add(res2ult);
+
+            return sd;
         }
 
         public async Task<string> Update(CarDto car)
