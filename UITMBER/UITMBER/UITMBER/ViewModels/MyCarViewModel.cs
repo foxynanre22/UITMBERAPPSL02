@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using UITMBER.Enums;
+using UITMBER.Models.Car;
 using UITMBER.Services.Car;
+using UITMBER.Views;
 using Xamarin.Forms;
 
 namespace UITMBER.ViewModels
@@ -13,6 +14,7 @@ namespace UITMBER.ViewModels
     class MyCarViewModel : BaseViewModel
     {
         public Command DeleteItemCommand { get; }
+        public Command UpdateItemCommand { get; }
 
         private string itemIdC;
         public ICarService _CarService => DependencyService.Get<ICarService>();
@@ -30,6 +32,7 @@ namespace UITMBER.ViewModels
         public MyCarViewModel()
         {
            DeleteItemCommand = new Command<long>(OnDeleteItem);
+           UpdateItemCommand = new Command<long>(OnUpdateItem);
         }
 
         public string Color
@@ -110,7 +113,7 @@ namespace UITMBER.ViewModels
                         Year = item.Year;
                         Manufacturer = item.Manufacturer;
                         PlateNo = item.PlateNo;
-                        Type = (CarType)item.Type;
+                        Type = (CarType)(Enums.CarType)item.Type;
             }
             catch (Exception)
             {
@@ -118,6 +121,12 @@ namespace UITMBER.ViewModels
             }
         }
 
+        public async void OnUpdateItem(long item)
+        {
+
+            //await Shell.Current.GoToAsync(nameof(UpdateCarPage));
+            await Shell.Current.GoToAsync($"{nameof(UpdateCarPage)}?{nameof(UpdateCarViewModel.ItemIdC)}={item}");
+        }
 
         private async void OnDeleteItem(long id)
         {           

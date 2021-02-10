@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using UITMBER.Models.Car;
 using UITMBER.Services.Car;
+using UITMBER.Views;
 using Xamarin.Forms;
 
 namespace UITMBER.ViewModels
 {
-    class NewCarViewModel : BaseViewModel
+    public class NewCarViewModel : BaseViewModel
     {
-        
-
-        
         public ICarService _CarService => DependencyService.Get<ICarService>();
         public long userId;
         public string model;
@@ -88,8 +86,8 @@ namespace UITMBER.ViewModels
 
         private async void OnCancel()
         {
-            
-            await Shell.Current.GoToAsync("..");
+            //await Shell.Current.GoToAsync(nameof(UpdateCarPage));
+            await Shell.Current.GoToAsync(nameof(MyCarsPage));
         }
 
         private async void OnSave()
@@ -108,8 +106,6 @@ namespace UITMBER.ViewModels
                 UserId=UserId,
                 Year=Year,
                 Type = Type
-
-
             };
 
             await _CarService.Add(newItem);

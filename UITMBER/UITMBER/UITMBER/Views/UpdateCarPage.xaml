@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UITMBER.Views.UpdateCarPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Update Car Page">
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="Photo" FontSize="Medium" />
+            <Entry Text="{Binding Photo, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Model" FontSize="Medium" />
+            <Entry Text="{Binding Model, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Color" FontSize="Medium" />
+            <Entry Text="{Binding Color, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Manufacturer" FontSize="Medium" />
+            <Entry Text="{Binding Manufacturer, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="PlateNo" FontSize="Medium" />
+            <Entry Text="{Binding PlateNo, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="UserId" FontSize="Medium" />
+            <Entry Text="{Binding UserId, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Year" FontSize="Medium" />
+            <Entry Text="{Binding Year, Mode=TwoWay}" FontSize="Medium" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding Id}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

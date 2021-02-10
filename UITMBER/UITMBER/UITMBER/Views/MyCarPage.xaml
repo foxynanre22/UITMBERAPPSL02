@@ -2,12 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UITMBER.Views.MyCarPage"
+             xmlns:local="clr-namespace:UITMBER.ViewModels"  
              Title="{Binding Title}">
-
+  
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding Id}" />
+        <ToolbarItem Text="Update" Command="{Binding UpdateItemCommand}" CommandParameter="{Binding Id}"/>
     </ContentPage.ToolbarItems>
+
     <ScrollView>
         <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
             <Image Source="{Binding Photo}" HeightRequest="300" />
