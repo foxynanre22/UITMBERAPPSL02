@@ -16,8 +16,6 @@
             <Entry Text="{Binding Manufacturer, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="PlateNo" FontSize="Medium" />
             <Entry Text="{Binding PlateNo, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="UserId" FontSize="Medium" />
-            <Entry Text="{Binding UserId, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Year" FontSize="Medium" />
             <Entry Text="{Binding Year, Mode=TwoWay}" FontSize="Medium" />
             <StackLayout Orientation="Horizontal">

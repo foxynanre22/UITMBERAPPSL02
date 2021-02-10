@@ -125,7 +125,7 @@ namespace UITMBER.ViewModels
         {
 
             //await Shell.Current.GoToAsync(nameof(UpdateCarPage));
-            await Shell.Current.GoToAsync($"{nameof(UpdateCarPage)}?{nameof(UpdateCarViewModel.ItemIdC)}={item}");
+            await Shell.Current.GoToAsync($"{nameof(UpdateCarPage)}?{nameof(UpdateCarViewModel.ItemmIdC)}={item}");
         }
 
         private async void OnDeleteItem(long id)

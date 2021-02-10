@@ -88,5 +88,6 @@ namespace UITMBER.ViewModels
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(MyCarPage)}?{nameof(MyCarViewModel.ItemIdC)}={item.Id}");
         }
+
     }
 }

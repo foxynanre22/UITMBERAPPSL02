@@ -10,6 +10,7 @@ using Xamarin.Forms;
 
 namespace UITMBER.ViewModels
 {
+    [QueryProperty(nameof(ItemmIdC), nameof(ItemmIdC))]
     public class UpdateCarViewModel : BaseViewModel
     {
         public ICarService _CarService => DependencyService.Get<ICarService>();
@@ -96,7 +97,7 @@ namespace UITMBER.ViewModels
             set => SetProperty(ref year, value);
         }
 
-        public string ItemIdC
+        public string ItemmIdC
         {
             get
             {
@@ -152,7 +153,6 @@ namespace UITMBER.ViewModels
                 Manufacturer = Manufacturer,
                 Photo = Photo,
                 PlateNo = PlateNo,
-                UserId = UserId,
                 Year = Year,
                 Type = Type
             };
