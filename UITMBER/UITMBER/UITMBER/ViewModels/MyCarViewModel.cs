@@ -136,7 +136,7 @@ namespace UITMBER.ViewModels
             }
             catch (Exception)
             {
-                Debug.WriteLine("Failed to Load Item");
+                Debug.WriteLine("Failed to Deleted Item");
             }
         }
 

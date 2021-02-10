@@ -87,7 +87,7 @@ namespace UITMBER.ViewModels
         private async void OnCancel()
         {
             //await Shell.Current.GoToAsync(nameof(UpdateCarPage));
-            await Shell.Current.GoToAsync(nameof(MyCarsPage));
+            await Shell.Current.GoToAsync("..");
         }
 
         private async void OnSave()
