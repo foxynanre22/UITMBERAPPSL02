@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UITMBER.Views.MyApplicationPage"
+             xmlns:local="clr-namespace:UITMBER.ViewModels">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="My Cars" Command="{Binding MyCarsCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:DataType="local:MyApplicationViewModel" Command="{Binding LoadItemCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <ScrollView>
+            <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
+                    <Image Source="{Binding DriverLicencePhoto}" HeightRequest="300" />
+                <Label Text="Numer licenzji:" FontAttributes="Bold" FontSize="Large" />
+                    <Label Text="{Binding DriverLicenceNo}" FontSize="Medium"/>
+                <Label Text="Status:" FontAttributes="Bold" FontSize="Large" />
+                    <Label Text="{Binding Accepted}" FontSize="Medium"/>
+                <Label Text="Data:" FontAttributes="Bold" FontSize="Large" />
+                    <Label Text="{Binding Date}" FontSize="Medium"/>
+               
+            </StackLayout>
+        </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

@@ -132,13 +132,15 @@ namespace UITMBER.ViewModels
         {           
             try
             {
-               await _CarService.Delete(id);
+                await _CarService.Delete(id);
+                await Shell.Current.GoToAsync("..");
             }
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Deleted Item");
             }
         }
+
 
     }
 }

@@ -17,6 +17,7 @@ namespace UITMBER
             Routing.RegisterRoute(nameof(NewCarPage), typeof(NewCarPage));
             Routing.RegisterRoute(nameof(UpdateCarPage), typeof(UpdateCarPage));
             Routing.RegisterRoute(nameof(MyCarsPage), typeof(MyCarsPage));
+            Routing.RegisterRoute(nameof(MyApplicationPage), typeof(MyApplicationPage));
         }
     }
 }

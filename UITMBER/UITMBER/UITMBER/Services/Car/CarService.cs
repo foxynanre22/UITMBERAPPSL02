@@ -37,11 +37,11 @@ namespace UITMBER.Services.Car
 
             var result = new CarDto
             {
-                Color = "Grin",
+                Color = "White",
                 Id = 1,
                 IsActive = true,
                 Manufacturer = "BlaBlacar",
-                Model = "Tesla MS",
+                Model = "Tesla X",
                 Photo = "https://upload.wikimedia.org/wikipedia/commons/0/0c/2017_Tesla_Model_X_front_5.27.18.jpg",
                 PlateNo = "Jeden",
                 Type = CarType.Seater7,
@@ -50,7 +50,7 @@ namespace UITMBER.Services.Car
             };
             var res2ult = new CarDto
             {
-                Color = "blue",
+                Color = "Black",
                 Id = 2,
                 IsActive = true,
                 Manufacturer = "BlaBlacar",
