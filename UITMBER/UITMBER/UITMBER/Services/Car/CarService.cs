@@ -40,29 +40,43 @@ namespace UITMBER.Services.Car
                 Color = "White",
                 Id = 1,
                 IsActive = true,
-                Manufacturer = "BlaBlacar",
+                Manufacturer = "Tesla",
                 Model = "Tesla X",
                 Photo = "https://upload.wikimedia.org/wikipedia/commons/0/0c/2017_Tesla_Model_X_front_5.27.18.jpg",
-                PlateNo = "Jeden",
+                PlateNo = "4253790",
                 Type = CarType.Seater7,
                 UserId = 2,
-                Year = 2020
+                Year = 2010
             };
-            var res2ult = new CarDto
+            var result2 = new CarDto
             {
                 Color = "Black",
                 Id = 2,
                 IsActive = true,
-                Manufacturer = "BlaBlacar",
+                Manufacturer = "Tesla",
                 Model = "Tesla MX",
                 Photo = "https://cdn.riastatic.com/photosnewr/auto/new_auto_storage/tesla-model-x__664102-620x465x70.jpg",
-                PlateNo = "Dwa",
+                PlateNo = "4265932",
+                Type = CarType.Seater7,
+                UserId = 2,
+                Year = 2015
+            };
+            var result3 = new CarDto
+            {
+                Color = "Red",
+                Id = 3,
+                IsActive = true,
+                Manufacturer = "Tesla",
+                Model = "Roadster",
+                Photo = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/NextGenTeslaRoadster_%28cropped%29.jpg/1200px-NextGenTeslaRoadster_%28cropped%29.jpg",
+                PlateNo = "7903224252",
                 Type = CarType.Seater7,
                 UserId = 2,
                 Year = 2020
             };
             sd.Add(result);
-            sd.Add(res2ult);
+            sd.Add(result2);
+            sd.Add(result3);
 
             return sd;
         }

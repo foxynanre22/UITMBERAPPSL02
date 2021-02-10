@@ -11,14 +11,21 @@
             <ScrollView>
             <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
                     <Image Source="{Binding DriverLicencePhoto}" HeightRequest="300" />
-                <Label Text="Numer licenzji:" FontAttributes="Bold" FontSize="Large" />
-                    <Label Text="{Binding DriverLicenceNo}" FontSize="Medium"/>
-                <Label Text="Status:" FontAttributes="Bold" FontSize="Large" />
-                    <Label Text="{Binding Accepted}" FontSize="Medium"/>
-                <Label Text="Data:" FontAttributes="Bold" FontSize="Large" />
-                    <Label Text="{Binding Date}" FontSize="Medium"/>
-               
-            </StackLayout>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Text="Numer licenzji:" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding DriverLicenceNo}" FontSize="Medium"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Status:" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Accepted}" FontSize="Medium"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="Data:" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Date}" FontSize="Medium"/>
+                    </Grid>
+                </StackLayout>
         </ScrollView>
         </RefreshView>
     </ContentPage.Content>

@@ -14,19 +14,28 @@
     <ScrollView>
         <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
             <Image Source="{Binding Photo}" HeightRequest="300" />
-            <Label Text="Color:" FontAttributes="Bold" FontSize="Large" />
-            <Label Text="{Binding Color}" FontSize="Medium"/>
-            <Label Text="Model:" FontAttributes="Bold" FontSize="Large" />
-            <Label Text="{Binding Model}" FontSize="Medium"/>
-            <Label Text="Year:" FontAttributes="Bold" FontSize="Large" />
-            <Label Text="{Binding Year}" FontSize="Medium"/>
-            <Label Text="Manufacturer:" FontAttributes="Bold" FontSize="Large" />
-            <Label Text="{Binding Manufacturer}" FontSize="Medium"/>
-            <Label Text="PlateNo:" FontAttributes="Bold" FontSize="Large" />
-            <Label Text="{Binding PlateNo}" FontSize="Medium"/>
-            <Label Text="Type:" FontAttributes="Bold" FontSize="Large" />
-            <Label Text="{Binding Type}" FontSize="Medium"/>
-            <Label Text="{Binding Id}" FontSize="Medium"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Text="Color:" FontAttributes="Bold" FontSize="Large" />
+                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Color}" FontSize="Medium"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="Model:" FontAttributes="Bold" FontSize="Large" />
+                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Model}" FontSize="Medium"/>
+                <Label Grid.Column="0" Grid.Row="2" Text="Year:" FontAttributes="Bold" FontSize="Large" />
+                <Label Grid.Column="1" Grid.Row="2" Text="{Binding Year}" FontSize="Medium"/>
+                <Label Grid.Column="0" Grid.Row="3" Text="Manufacturer:" FontAttributes="Bold" FontSize="Large" />
+                <Label Grid.Column="1" Grid.Row="3" Text="{Binding Manufacturer}" FontSize="Medium"/>
+                <Label Grid.Column="0" Grid.Row="4" Text="PlateNo:" FontAttributes="Bold" FontSize="Large" />
+                <Label Grid.Column="1" Grid.Row="4" Text="{Binding PlateNo}" FontSize="Medium"/>
+                <Label Grid.Column="0" Grid.Row="5" Text="Type:" FontAttributes="Bold" FontSize="Large" />
+                <Label Grid.Column="1" Grid.Row="5" Text="{Binding Type}" FontSize="Medium"/>
+            </Grid>
         </StackLayout>
     </ScrollView>
 </ContentPage>
