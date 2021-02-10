@@ -12,9 +12,11 @@ namespace UITMBER.ViewModels
     [QueryProperty(nameof(ItemIdC), nameof(ItemIdC))]
     class MyCarViewModel : BaseViewModel
     {
+        public Command DeleteItemCommand { get; }
+
         private string itemIdC;
         public ICarService _CarService => DependencyService.Get<ICarService>();
-        public long Id { get; set; }
+        public long id;
         public long userId;
         public string model;
         public string manufacturer;
@@ -24,10 +26,23 @@ namespace UITMBER.ViewModels
         public string color;
         public CarType type;
 
+
+        public MyCarViewModel()
+        {
+           DeleteItemCommand = new Command<long>(OnDeleteItem);
+        }
+
         public string Color
         {
+
             get => color;
             set => SetProperty(ref color, value);
+        }
+
+        public long Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
         }
         public string PlateNo
         {
@@ -96,6 +111,19 @@ namespace UITMBER.ViewModels
                         Manufacturer = item.Manufacturer;
                         PlateNo = item.PlateNo;
                         Type = (CarType)item.Type;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Item");
+            }
+        }
+
+
+        private async void OnDeleteItem(long id)
+        {           
+            try
+            {
+               await _CarService.Delete(id);
             }
             catch (Exception)
             {
