@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:UITMBER.Extentions"
              x:Class="UITMBER.Views.UpdateCarPage"
              Shell.PresentationMode="ModalAnimated"
              Title="Update Car Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntEnumConverter x:Key="IntEnum"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
             <Label Text="Photo" FontSize="Medium" />
@@ -18,6 +23,7 @@
             <Entry Text="{Binding PlateNo, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Year" FontSize="Medium" />
             <Entry Text="{Binding Year, Mode=TwoWay}" FontSize="Medium" />
+            <Picker ItemsSource="{Binding CarsNames}" SelectedIndex="{Binding Type, Converter={StaticResource IntEnum}}"/>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding Id}" HorizontalOptions="FillAndExpand"></Button>

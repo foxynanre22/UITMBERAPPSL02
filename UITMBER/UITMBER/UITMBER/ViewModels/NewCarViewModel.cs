@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using UITMBER.Extentions;
 using UITMBER.Models.Car;
 using UITMBER.Services.Car;
 using UITMBER.Views;
@@ -53,6 +55,13 @@ namespace UITMBER.ViewModels
         {
             get => type;
             set => SetProperty(ref type, value);
+        }
+        public List<string> CarsNames
+        {
+            get
+            {
+                return Enum.GetNames(typeof(CarType)).Select(b => b.SplitCamelCase()).ToList();
+            }
         }
         public string Photo
         {
