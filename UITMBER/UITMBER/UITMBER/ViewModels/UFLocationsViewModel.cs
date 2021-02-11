@@ -16,20 +16,20 @@ namespace UITMBER.ViewModels
     {
         public IUFLocationsService _ufLocationsService => DependencyService.Get<IUFLocationsService>();
 
-        private LocationDto _selectedItem;
+        private UserFavouriteLocation _selectedItem;
 
-        public ObservableCollection<LocationDto> Locations { get; }
+        public ObservableCollection<UserFavouriteLocation> Locations { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<LocationDto> ItemTapped { get; }
+        public Command<UserFavouriteLocation> ItemTapped { get; }
 
         public UFLocationsViewModel()
         {
             Title = "Ulubione lokalizacje";
-            Locations = new ObservableCollection<LocationDto>();
+            Locations = new ObservableCollection<UserFavouriteLocation>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<LocationDto>(OnItemSelected);
+            ItemTapped = new Command<UserFavouriteLocation>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
         }
@@ -42,9 +42,9 @@ namespace UITMBER.ViewModels
             {
                 Locations.Clear();
                 var locations = await _ufLocationsService.GetMyLocations();
-                var items = locations.Select(x => x.ToLocationDto());
+               // var items = locations.Select(x => x.ToLocationDto());
 
-                foreach (var item in items)
+                foreach (var item in locations)
                 {
                     Locations.Add(item);
                 }
@@ -65,7 +65,7 @@ namespace UITMBER.ViewModels
             SelectedItem = null;
         }
 
-        public LocationDto SelectedItem
+        public UserFavouriteLocation SelectedItem
         {
             get => _selectedItem;
             set
@@ -80,14 +80,13 @@ namespace UITMBER.ViewModels
             await Shell.Current.GoToAsync(nameof(NewLocationPage));
         }
 
-        async void OnItemSelected(LocationDto item)
+        async void OnItemSelected(UserFavouriteLocation item)
         {
             if (item == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            //TODO Add "location detail Page"
-            //await Shell.Current.GoToAsync($"{nameof(LocationDetailPage)}?{nameof(LocationDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(LocationDetailPage)}?{nameof(LocationDetailViewModel.ItemId)}={item.Id}");
+
         }
     }
 }

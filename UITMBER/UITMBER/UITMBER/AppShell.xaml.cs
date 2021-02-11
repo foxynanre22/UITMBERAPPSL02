@@ -14,6 +14,7 @@ namespace UITMBER
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(NewLocationPage), typeof(NewLocationPage));
+            Routing.RegisterRoute(nameof(LocationDetailPage), typeof(LocationDetailPage));
 
         }
 
