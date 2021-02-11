@@ -35,7 +35,9 @@ namespace UITMBER.ViewModels
             MapControl.IsShowingUser = true;
 
             MapControl.MapClicked += MapControl_MapClicked;
-
+            
+            if(Settings.TokenExpire<=DateTime.Now)
+            Shell.Current.GoToAsync("//LoginPage");
         }
 
         private async void MapControl_MapClicked(object sender, Xamarin.Forms.Maps.MapClickedEventArgs e)
@@ -84,10 +86,10 @@ namespace UITMBER.ViewModels
 
 
 
-                var location = await Geolocation.GetLocationAsync(new GeolocationRequest()
-                {
-                    DesiredAccuracy = GeolocationAccuracy.Default
-                });
+                //var location = await Geolocation.GetLocationAsync(new GeolocationRequest()
+                //{
+                //    DesiredAccuracy = GeolocationAccuracy.Default
+                //});
 
                 var location = await Geolocation.GetLastKnownLocationAsync();
 
