@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UITMBER.Models.UserFavouriteLocation;
 using UITMBER.Services.UFLocations;
+using UITMBER.Views;
 using Xamarin.Forms;
 
 namespace UITMBER.ViewModels
@@ -76,8 +77,7 @@ namespace UITMBER.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            //TODO Add "add location" page
-            //await Shell.Current.GoToAsync(nameof(NewLocationPage));
+            await Shell.Current.GoToAsync(nameof(NewLocationPage));
         }
 
         async void OnItemSelected(LocationDto item)
