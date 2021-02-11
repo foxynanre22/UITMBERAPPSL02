@@ -21,6 +21,7 @@ namespace UITMBER.Services.Request
             return client;
         }
 
+   
         private async Task HandleResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
@@ -90,6 +91,23 @@ namespace UITMBER.Services.Request
             var content = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<TResult>(content);
+
+        }
+
+    
+
+        public async Task<TResult> DeleteAsync<TResult>(string uri)
+        {
+            HttpClient client = CreateHttpClient();
+
+            var response = await client.DeleteAsync(uri);
+
+            await HandleResponse(response);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<TResult>(content);
+
         }
 
         // This method must be in a class in a platform project, even if
