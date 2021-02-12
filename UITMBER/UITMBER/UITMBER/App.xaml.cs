@@ -37,7 +37,8 @@ namespace UITMBER
 
         protected override async void OnStart()
         {
-            if(Settings.TokenExpire < DateTime.Now)
+          
+            if (Settings.TokenExpire < DateTime.Now)
             {
                 await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             }

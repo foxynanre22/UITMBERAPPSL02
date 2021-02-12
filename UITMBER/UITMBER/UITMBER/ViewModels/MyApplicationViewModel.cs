@@ -112,7 +112,7 @@ namespace UITMBER.ViewModels
                 var item = items.Last();
                 Id = item.Id;
                 Date = item.Date;
-                DriverLicencePhoto = item.DriverLicencePhoto;
+                DriverLicencePhoto = !string.IsNullOrEmpty(item.DriverLicencePhoto) ? item.DriverLicencePhoto : "ic_user";
                 DriverLicenceNo = item.DriverLicenceNo;
                 Accepted = item.Accepted;
                 UserId = item.UserId;
@@ -155,6 +155,9 @@ namespace UITMBER.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(SendApplicationPage));
         }
+
+
+
 
     }
 }

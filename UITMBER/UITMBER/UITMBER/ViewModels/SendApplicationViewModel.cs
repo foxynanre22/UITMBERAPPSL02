@@ -10,6 +10,10 @@ using UITMBER.Services.Clients;
 using Xamarin.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Xamarin.Essentials;
+using System.IO;
+using System.Collections.ObjectModel;
 
 namespace UITMBER.ViewModels
 {
@@ -50,11 +54,26 @@ namespace UITMBER.ViewModels
             }
         }
 
-
-        public IList<string> carList = new List<string>();
-        public IList<string> CarList
+        private ImageSource imageSource;
+        public ImageSource ImageSource
         {
-            get => carList;
+            get { return imageSource; }
+            set
+            {
+                    imageSource = value;
+                    OnPropertyChanged();
+               
+               
+            }
+        }
+        
+
+        private string licenceImgBase64 = "";
+
+
+        public ObservableCollection<string> CarList
+        {
+            get;
         }
 
         public Command SendCommand { get; }
@@ -75,10 +94,48 @@ namespace UITMBER.ViewModels
             }
         }
 
+        public ICommand PickPhotoCommand => new Command(async () => await PickPhotoAsync());
+
+        private async Task PickPhotoAsync()
+        {
+            try
+            {
+                if (!MediaPicker.IsCaptureSupported)
+                    return;
+
+
+                var file = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions() { Title = "DriverLicens" });
+
+                if (file == null)
+                    return;
+
+                using (var stream = await file.OpenReadAsync())
+                {
+                    byte[] photoData = new byte[stream.Length];
+
+                    stream.Read(photoData, 0, Convert.ToInt32(stream.Length));
+
+                    licenceImgBase64 = Convert.ToBase64String(photoData);
+                }
+
+
+
+                ImageSource = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(licenceImgBase64)));
+                
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
 
         public SendApplicationViewModel()
         {
             SendCommand = new Command(OnSendClicked);
+            licenceImgBase64 = "";
+            CarList = new ObservableCollection<string>();
+            ImageSource = ImageSource.FromFile("ic_user.png");
             Cars();
         }
 
@@ -109,8 +166,10 @@ namespace UITMBER.ViewModels
             userid = cars[0].UserId;
             foreach (CarDto car in cars)
             {
-                carList.Add(car.Model);
+                CarList.Add(car.Model);
             }
+
+            //OnPropertyChanged(nameof(CarList));
         }
 
         //W MyApplicationPage.xaml

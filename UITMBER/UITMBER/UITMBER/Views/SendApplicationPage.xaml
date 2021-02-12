@@ -13,8 +13,19 @@
             <Label Text="Numer licencji"/>
             <Entry Text="{Binding LicenceNr}" ></Entry>
             <Label Text="Zdjęcie licencji"></Label>
-            <Entry Text="{Binding LicenceImg}"></Entry>
-            <Picker Title="Samochód" ItemsSource="{Binding CarList}" SelectedItem="{Binding PickerSelectedItem}"/>
+            <Image HeightRequest="200" Source="{Binding ImageSource}"></Image>
+            <Button Text="Zrup zdjencie" 
+                    BackgroundColor="White"
+                    TextColor="{StaticResource Accent}"
+                    BorderColor="{StaticResource Accent}"
+                    BorderWidth="1"
+                    Command="{Binding PickPhotoCommand}"></Button>
+
+
+            <Picker TextColor="{StaticResource Text}"
+                    Title="Samochód"
+                    ItemsSource="{Binding CarList}" 
+                    SelectedItem="{Binding PickerSelectedItem}"/>
             <Button Text="Wyślij" Command="{Binding SendCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
