@@ -6,11 +6,21 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
+using UITMBER.Services.Client.Drivers;
+using UITMBER.Services.Location;
+using UITMBER.Services.Authentication;
+using System.Reflection;
+using Xamarin.Forms.GoogleMaps;
 
 namespace UITMBER.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        public IDriversService DriversService => DependencyService.Get<IDriversService>();
+        public ILocationService LocationService => DependencyService.Get<ILocationService>();
+
+        public IAuthenticationService AuthService => DependencyService.Get<IAuthenticationService>();
+
         private string text;
         public string Text
         {
@@ -18,101 +28,137 @@ namespace UITMBER.ViewModels
             set => SetProperty(ref text, value);
         }
 
-        private Xamarin.Forms.Maps.Map mapControl;
-        public Xamarin.Forms.Maps.Map MapControl
+        private Xamarin.Forms.GoogleMaps.Map mapControl;
+        public Xamarin.Forms.GoogleMaps.Map MapControl
         {
             get => mapControl;
             set => SetProperty(ref mapControl, value);
         }
 
-        public ICommand ActionCommand => new Command(async () => await GetCurrentLocation());
+        public ICommand GetCurrentLocationCommand => new Command(async () => await GetMyCurrentLocation());
 
         public MainViewModel()
         {
-            var mapSpan = Xamarin.Forms.Maps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(50.043604d, 22.0261172d), Xamarin.Forms.Maps.Distance.FromKilometers(3));
+            var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(50.043604d, 22.0261172d), Xamarin.Forms.GoogleMaps.Distance.FromKilometers(3));
 
-            MapControl = new Xamarin.Forms.Maps.Map(mapSpan);
-            MapControl.IsShowingUser = true;
 
-            MapControl.MapClicked += MapControl_MapClicked;
+            MapControl = new Xamarin.Forms.GoogleMaps.Map();
+
+            MapControl.MoveToRegion(mapSpan);
+
+            MapControl.MyLocationEnabled = true;
+
+            AddMapStyle();
 
         }
 
-        private async void MapControl_MapClicked(object sender, Xamarin.Forms.Maps.MapClickedEventArgs e)
+        private void AddMapStyle()
         {
-            MapControl.Pins.Clear();
-
-            var placemarks = await Geocoding.GetPlacemarksAsync(e.Position.Latitude, e.Position.Longitude);
-
-            var placemark = placemarks?.FirstOrDefault();
-
-            if(placemark != null)
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream($"UITMBER.MapStyle.json");
+            string styleFile;
+            using (var reader = new System.IO.StreamReader(stream))
             {
-                MapControl.Pins.Add(new Xamarin.Forms.Maps.Pin()
-                {
-                    Position = e.Position,
-                    Label = placemark.Thoroughfare + " " + placemark.SubThoroughfare + ", " + placemark.Locality + " " + placemark.PostalCode,
-                    Type = Xamarin.Forms.Maps.PinType.SavedPin
-                });
-            }
-            else
-            {
-                MapControl.Pins.Add(new Xamarin.Forms.Maps.Pin()
-                {
-                    Position = e.Position,
-                    Label = "",
-                    Type = Xamarin.Forms.Maps.PinType.SavedPin
-                });
+                styleFile = reader.ReadToEnd();
             }
 
-          
+            MapControl.MapStyle = MapStyle.FromJson(styleFile);
         }
 
-        private async Task GetCurrentLocation()
+
+        private async Task GetMyCurrentLocation()
         {
             try
             {
 
-                //var locations = await Geocoding.GetLocationsAsync("Paderewskiego Rzeszów");
-
-
-                //var location = locations?.FirstOrDefault();
-
-                //var mapSpan = Xamarin.Forms.Maps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(location.Latitude, location.Longitude), Xamarin.Forms.Maps.Distance.FromKilometers(.5));
-
-                //MapControl.MoveToRegion(mapSpan);
+                //var result = await AuthService.Authenticate(new Models.Authentication.AuthenticationRequest()
+                //{
+                //    Login = "test2@test.pl",
+                //    Password = "Sm1shn3"
+                //});
 
 
 
-                var location = await Geolocation.GetLocationAsync(new GeolocationRequest()
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if(location == null)
                 {
-                    DesiredAccuracy = GeolocationAccuracy.Default
-                });
 
-                //var location = await Geolocation.GetLastKnownLocationAsync();
+
+                    location = await Geolocation.GetLocationAsync();
+                }
+
 
                 if (location != null)
                 {
-                    Text = $"Lat: {location.Latitude} Long: {location.Longitude}";
+                    var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(location.Latitude, location.Longitude), Xamarin.Forms.GoogleMaps.Distance.FromKilometers(1.5));
+
+                    MapControl.MoveToRegion(mapSpan);
+
+
+                    await LoadNearDrivers(location);
                 }
 
             }
             catch (FeatureNotSupportedException ex)
             {
-                //Brak lokalizacji w urzadzeniu
+                //Nie obsługiwana lokalizacja
             }
             catch (FeatureNotEnabledException ex)
             {
-                //Lokalizacja off
+                //lokalizacja wyłączona
             }
             catch (PermissionException ex)
             {
-                //bark uprawnien do lokalizacji
+                //Brak uprawnien do lokalizacji
             }
             catch (Exception ex)
             {
 
+
             }
+
+
+        }
+
+        private async Task LoadNearDrivers(Location location)
+        {
+
+            MapControl.Polylines.Clear();
+            MapControl.Pins.Clear();
+
+            //SERVER
+            var drivers = await DriversService.GetNerbyDriveres(new Models.LatLong() { Lat = location.Latitude, Long = location.Longitude });
+
+            foreach (var driver in drivers)
+            {
+                MapControl.Pins.Add(new Xamarin.Forms.GoogleMaps.Pin
+                {
+                    Type = PinType.Place,
+                    Position = new Position(driver.Lat, driver.Long),
+                    Label = "Driver",
+                    Icon = (Device.RuntimePlatform == Device.Android) ? BitmapDescriptorFactory.FromBundle("ic_car.png") : BitmapDescriptorFactory.FromView(new Image() { Source = "ic_car.png", WidthRequest = 25, HeightRequest = 25 }),
+                    Tag = string.Empty
+                });
+            }
+
+
+            ////MOCKDATA
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    var random = new Random();
+
+            //    MapControl.Pins.Add(new Xamarin.Forms.GoogleMaps.Pin
+            //    {
+            //        Type = PinType.Place,
+            //        Position = new Position(location.Latitude + (random.NextDouble() * 0.04), location.Longitude + (random.NextDouble() * 0.04)),
+            //        Label = "Driver",
+            //        Icon = (Device.RuntimePlatform == Device.Android) ? BitmapDescriptorFactory.FromBundle("ic_car.png") : BitmapDescriptorFactory.FromView(new Image() { Source = "ic_car.png", WidthRequest = 25, HeightRequest = 25 }),
+            //        Tag = string.Empty
+            //    });
+            //}
+
+
         }
     }
 }
