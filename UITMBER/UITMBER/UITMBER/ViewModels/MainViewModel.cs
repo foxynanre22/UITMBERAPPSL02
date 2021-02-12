@@ -84,8 +84,10 @@ namespace UITMBER.ViewModels
                 if(location == null)
                 {
 
+
                     location = await Geolocation.GetLocationAsync();
                 }
+
 
                 if (location != null)
                 {

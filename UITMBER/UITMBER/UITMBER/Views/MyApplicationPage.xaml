@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UITMBER.Views.MyApplicationPage"
+             xmlns:local="clr-namespace:UITMBER.ViewModels">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="My Cars" Command="{Binding MyCarsCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:DataType="local:MyApplicationViewModel" Command="{Binding LoadItemCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <ScrollView>
+            <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
+                    <Image Source="{Binding DriverLicencePhoto}" HeightRequest="300" />
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Text="Numer licenzji:" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding DriverLicenceNo}" FontSize="Medium"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Status:" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Accepted}" FontSize="Medium"/>
+                        <Label Grid.Column="0" Grid.Row="2" Text="Data:" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Date}" FontSize="Medium"/>
+                    </Grid>
+                </StackLayout>
+        </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
