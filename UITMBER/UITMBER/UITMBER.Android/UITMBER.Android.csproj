@@ -107,6 +107,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo.png" />
+      <ItemGroup>
     <AndroidAsset Include="Assets\ic_car.png" />
   </ItemGroup>
   <ItemGroup>

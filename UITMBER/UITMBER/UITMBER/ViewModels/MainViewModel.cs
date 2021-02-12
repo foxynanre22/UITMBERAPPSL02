@@ -41,7 +41,6 @@ namespace UITMBER.ViewModels
         {
             var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(50.043604d, 22.0261172d), Xamarin.Forms.GoogleMaps.Distance.FromKilometers(3));
 
-
             MapControl = new Xamarin.Forms.GoogleMaps.Map();
 
             MapControl.MoveToRegion(mapSpan);
@@ -83,10 +82,9 @@ namespace UITMBER.ViewModels
 
                 if(location == null)
                 {
-
-
                     location = await Geolocation.GetLocationAsync();
                 }
+
 
 
                 if (location != null)
