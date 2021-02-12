@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo.png" />
+	  </ItemGroup>
       <ItemGroup>
     <AndroidAsset Include="Assets\ic_car.png" />
   </ItemGroup>
