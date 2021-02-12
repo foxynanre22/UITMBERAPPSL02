@@ -94,6 +94,7 @@ namespace UITMBER.ViewModels
                     MapControl.MoveToRegion(mapSpan);
 
 
+
                     await LoadNearDrivers(location);
                 }
 

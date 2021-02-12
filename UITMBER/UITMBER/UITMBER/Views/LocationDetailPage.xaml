@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:UITMBER.ViewModels"
+             x:Class="UITMBER.Views.LocationDetailPage">
+    <ContentPage.BindingContext>
+        <vm:LocationDetailViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Usuń z ulubionych" Command="{Binding DeleteItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition> 
+                <RowDefinition Height="50"></RowDefinition> 
+                <RowDefinition Height="50"></RowDefinition> 
+                <RowDefinition Height="*"></RowDefinition> 
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Nazwa miejsca"/>
+            <Label  Grid.Column="1" Text="{Binding   Name }"></Label>
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Szerokość Geograficzna"/>
+            <Label  Grid.Row="1" Grid.Column="1" Text="{Binding  Lat}"></Label>
+
+            <Label Grid.Row="2"  Grid.Column="0" Text="Długość Geograficzna"></Label>
+            <Label  Grid.Row="2" Grid.Column="1" Text="{Binding  Long}"></Label>
+
+            <ContentView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Content="{Binding MapControl}"
+                ></ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
