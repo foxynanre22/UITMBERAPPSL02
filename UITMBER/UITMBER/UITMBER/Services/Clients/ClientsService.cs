@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace UITMBER.Services.Clients
 {
-    class ClientsService : IClientsService
+    public class ClientsService : IClientsService
     {
         private IRequestService _requestService => DependencyService.Get<IRequestService>();
 

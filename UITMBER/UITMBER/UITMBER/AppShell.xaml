@@ -32,7 +32,7 @@
     <TabBar>
         <ShellContent Title="Main" Icon="tab_about.png" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
         <ShellContent Title="Orders" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Profile" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Profile" Icon="tab_feed.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
         <ShellContent Title="Locations" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:UFLocationPage}" />
         <ShellContent Title="Driver" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </TabBar>

@@ -6,7 +6,7 @@ using UITMBER.Models.Clients;
 
 namespace UITMBER.Services.Clients
 {
-    interface IClientsService
+    public interface IClientsService
     {
         Task<ClientsDto> GetMyProfile(int clientsId);
         Task<string> UpdatePhoto(ClientsDto photo);

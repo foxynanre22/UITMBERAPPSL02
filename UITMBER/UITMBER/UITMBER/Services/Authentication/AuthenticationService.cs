@@ -27,7 +27,6 @@ namespace UITMBER.Services.Authentication
 
 
             var result = await _requestService.PostAsync<AuthenticationRequest, AuthenticationReponse>(uri, input);
-
             Settings.AccessToken = result.AccessToken;
             Settings.Name = result.Name;
             Settings.Roles = result.Roles;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UITMBER.Models.Clients
 {
-    class ClientsDto
+    public class ClientsDto
     {
         public long UserId { get; set; }
 
