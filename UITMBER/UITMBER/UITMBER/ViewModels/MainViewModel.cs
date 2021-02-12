@@ -84,12 +84,12 @@ namespace UITMBER.ViewModels
 
 
 
-                var location = await Geolocation.GetLocationAsync(new GeolocationRequest()
-                {
-                    DesiredAccuracy = GeolocationAccuracy.Default
-                });
+                //var location = await Geolocation.GetLocationAsync(new GeolocationRequest()
+                //{
+                //    DesiredAccuracy = GeolocationAccuracy.Default
+                //});
 
-                location = await Geolocation.GetLastKnownLocationAsync();
+                var location = await Geolocation.GetLastKnownLocationAsync();
 
                 if (location != null)
                 {

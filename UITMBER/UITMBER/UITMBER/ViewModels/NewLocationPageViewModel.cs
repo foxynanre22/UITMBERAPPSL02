@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UITMBER.Models.UserFavouriteLocation;
 using UITMBER.Services.UFLocations;
+using UITMBER.Views;
 using Xamarin.Forms;
 
 namespace UITMBER.ViewModels
@@ -50,6 +51,7 @@ namespace UITMBER.ViewModels
                 Name = name,
                 UserId = UserId
             });
+            await Shell.Current.GoToAsync($"//{nameof(UFLocationPage)}");
         }
     }
 }
