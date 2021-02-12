@@ -22,6 +22,7 @@ namespace UITMBER.ViewModels
         public Command LoadItemCommand { get; }
         public ObservableCollection<GetApplicationResponse> _GetApplicationResponses { get; }
         public Command MyCarsCommand { get; }
+        public Command SendApplicationCommand { get; }
 
         public long id;
 
@@ -33,6 +34,8 @@ namespace UITMBER.ViewModels
         public string driverLicencePhoto;
         public long carId;
 
+        public bool SendApplicationVisible { get; set; }
+
 
         public MyApplicationViewModel()
         {
@@ -42,6 +45,8 @@ namespace UITMBER.ViewModels
             MyCarsCommand = new Command(OnMyCars);
             //DeleteItemCommand = new Command<long>(OnDeleteItem);
             //UpdateItemCommand = new Command<long>(OnUpdateItem);
+            CanSendApplication();
+            SendApplicationCommand = new Command(OnSendApplication);
         }
 
         public DateTime Date
@@ -133,6 +138,23 @@ namespace UITMBER.ViewModels
             await Shell.Current.GoToAsync(nameof(MyCarsPage));
         }
 
+
+        private void CanSendApplication()
+        {
+            if (Settings.Roles == "Client" && Settings.TokenExpire >= DateTime.Now)
+            {
+                SendApplicationVisible = true;
+            }
+            else
+            {
+                SendApplicationVisible = false;
+            }
+        }
+
+        private async void OnSendApplication(object obj)
+        {
+            await Shell.Current.GoToAsync(nameof(SendApplicationPage));
+        }
 
     }
 }

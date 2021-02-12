@@ -113,32 +113,6 @@ namespace UITMBER.ViewModels
             }
         }
 
-
-        //Funkcje dla strony MyApplication
-
-        //private void CanSendApplication()
-        //{
-        //    if (Settings.Roles == "Client" && Settings.TokenExpire >= DateTime.Now)
-        //    {
-        //        SendApplicationVisible = true;
-        //    }
-        //    else
-        //    {
-        //        SendApplicationVisible = false;
-        //    }
-        //}
-
-        //public Command SendApplicationCommand { get; }
-        //private async void OnSendApplication(object obj)
-        //{
-        //    await Shell.Current.GoToAsync(nameof(SendApplicationPage));
-        //}
-
-        //w konstruktorze
-        //CanSendApplication();
-        //SendApplicationCommand = new Command(OnSendApplication);
-
         //W MyApplicationPage.xaml
-        //<Button Grid.ColumnSpan="2" Grid.Row= "3" Text= "Wyślij aplikację" IsVisible= "{Binding SendApplicationVisible}" Command= "{Binding SendApplicationCommand}" ></ Button >
     }
 }
