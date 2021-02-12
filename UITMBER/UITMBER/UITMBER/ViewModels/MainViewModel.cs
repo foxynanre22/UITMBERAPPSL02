@@ -11,6 +11,7 @@ using UITMBER.Services.Location;
 using UITMBER.Services.Authentication;
 using System.Reflection;
 using Xamarin.Forms.GoogleMaps;
+using System.Diagnostics;
 
 namespace UITMBER.ViewModels
 {
@@ -19,7 +20,6 @@ namespace UITMBER.ViewModels
         public IDriversService DriversService => DependencyService.Get<IDriversService>();
         public ILocationService LocationService => DependencyService.Get<ILocationService>();
 
-        public IAuthenticationService AuthService => DependencyService.Get<IAuthenticationService>();
 
         private string text;
         public string Text
@@ -36,7 +36,8 @@ namespace UITMBER.ViewModels
         }
 
         public ICommand GetCurrentLocationCommand => new Command(async () => await GetMyCurrentLocation());
-
+    
+        
         public MainViewModel()
         {
             var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(50.043604d, 22.0261172d), Xamarin.Forms.GoogleMaps.Distance.FromKilometers(3));
@@ -115,6 +116,7 @@ namespace UITMBER.ViewModels
             {
 
 
+                Debug.WriteLine(ex.Message);
             }
 
 
@@ -142,7 +144,7 @@ namespace UITMBER.ViewModels
             }
 
 
-            ////MOCKDATA
+            //MOCKDATA
             //for (int i = 0; i < 10; i++)
             //{
             //    var random = new Random();
