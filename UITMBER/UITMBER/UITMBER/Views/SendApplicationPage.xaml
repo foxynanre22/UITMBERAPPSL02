@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:vm="clr-namespace:UITMBER.ViewModels"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UITMBER.Views.SendApplicationPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <vm:SendApplicationViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Numer licencji"/>
+            <Entry Text="{Binding LicenceNr}" ></Entry>
+            <Label Text="Zdjęcie licencji"></Label>
+            <Entry Text="{Binding LicenceImg}"></Entry>
+            <Picker Title="Samochód" ItemsSource="{Binding CarList}" SelectedItem="{Binding PickerSelectedItem}"/>
+            <Button Text="Wyślij" Command="{Binding SendCommand}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
