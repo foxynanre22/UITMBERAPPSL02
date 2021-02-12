@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UITMBER.Models.Car;
 using UITMBER.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace UITMBER.Views
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class UpdateCarPage : ContentPage
     {
-        public MainPage()
+        public CarDto Item { get; set; }
+        public UpdateCarPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-
-            (BindingContext as MainViewModel).GetCurrentLocationCommand.Execute(true);
-
-            base.OnAppearing();
+            BindingContext = new UpdateCarViewModel();
         }
     }
 }
