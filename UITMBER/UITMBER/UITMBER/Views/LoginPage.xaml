@@ -2,13 +2,109 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:vm="clr-namespace:UITMBER.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:UITMBER.Views"
              mc:Ignorable="d"
              x:Class="UITMBER.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundImage="background.jpg"
+             >
+    
+    <ContentPage.Resources>
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Text}" />
+    </Style>
+
+    <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="PlaceholderColor" Value="{StaticResource TextDescription}" />
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+    </Style>
+
+    <Style x:Key="LabelInGridStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="Subtitle" />
+    </Style>
+
+    <Style x:Key="ButtonInGridStyle" TargetType="Button">
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="200" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="CornerRadius" Value="25" />
+    </Style>
+    </ContentPage.Resources>    
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+        <StackLayout Padding="0,30,0,30" VerticalOptions="End">
+            <Image Source="logo.png"
+                   Aspect="AspectFit" 
+                   VerticalOptions="Start"/>
+            
+            <Frame CornerRadius="25" Opacity="0.7" Margin="0,80,0,0">
+                <StackLayout VerticalOptions="Center">
+                    <Label Text="Użytkownik" 
+                           FontSize="Title"
+                           Style="{StaticResource LabelStyle}"></Label>
+
+                    <Entry Placeholder="Email" 
+                           MaxLength="128" 
+                           Text="{Binding Email}"  
+                           ReturnType="Next"
+                           x:Name="email"
+                           Style="{StaticResource EntryStyle}">
+                        <Entry.Behaviors>
+                            <local:EntryFocusBehavior NextFocusElementName="haslo"/>
+                        </Entry.Behaviors>
+                    </Entry>
+            
+                    <Label Text="Hasło"  
+                           FontSize="Title"
+                           Style="{StaticResource LabelStyle}"></Label>
+            
+                    <Entry Placeholder="Hasło" 
+                           IsPassword="True" 
+                           MaxLength="16" 
+                           Text="{Binding Password}" 
+                           x:Name="haslo"
+                           ReturnType="Done"
+                           Style="{StaticResource EntryStyle}"/>
+
+                    <Grid Opacity="0.95">
+                        <Label Text="Nie pamiętasz hasła?" 
+                               Grid.Row="0"
+                               Style="{StaticResource LabelInGridStyle}"></Label>
+
+                        <Button Text="Odzyskaj konto" 
+                                Grid.Row="0" 
+                                Style="{StaticResource ButtonInGridStyle}"
+                                Command="{Binding RecoverCommand}"></Button>
+
+                        <Label Text="Nie posiadasz konta?" 
+                               Grid.Row="1" 
+                               Style="{StaticResource LabelInGridStyle}"></Label>
+
+                        <Button Text="Zarejestruj się" 
+                                Grid.Row="1" 
+                                Style="{StaticResource ButtonInGridStyle}"
+                                Command="{Binding RegisterCommand}"></Button>
+                    </Grid>
+
+                        <Button VerticalOptions="End" 
+                            Text="Zaloguj się" 
+                            Command="{Binding LoginCommand}"  
+                            CornerRadius="25"
+                            BackgroundColor="{StaticResource PrimaryDark}"/>
+
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

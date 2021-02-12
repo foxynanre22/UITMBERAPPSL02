@@ -9,19 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace UITMBER.Views
 {
-    public partial class MainPage : ContentPage
+
+    public partial class MyCarPage : ContentPage
     {
-        public MainPage()
+        public MyCarPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-
-            (BindingContext as MainViewModel).GetCurrentLocationCommand.Execute(true);
-
-            base.OnAppearing();
+            BindingContext = new MyCarViewModel();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace UITMBER.Services.Client.Drivers
 
         public async Task<List<DriverDto>> GetNerbyDriveres(LatLong latlong)
         {
-            var url = $"{Settings.SERVER_ENDPOINT}/Driver/GetNerbyDriveres?latitude={latlong.Lat}&longitude={latlong.Long}";
+            var url = $"{Settings.SERVER_ENDPOINT}/Driver/GetNerbyDriveres?latitude={latlong.Lat.ToString().Replace(',', '.')}&longitude={latlong.Long.ToString().Replace(',', '.')}";
             var data = await _requestService.GetAsync<List<DriverDto>>(url);
 
             return data;
