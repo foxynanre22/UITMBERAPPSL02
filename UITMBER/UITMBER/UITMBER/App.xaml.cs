@@ -35,16 +35,25 @@ namespace UITMBER
             MainPage = new AppShell();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+          
+            if (Settings.TokenExpire < DateTime.Now)
+            {
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            }
         }
 
         protected override void OnSleep()
         {
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
+            if (Settings.TokenExpire < DateTime.Now)
+            {
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            }
         }
 
         private void RegisterServices()

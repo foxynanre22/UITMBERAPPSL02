@@ -11,8 +11,10 @@
             <Color x:Key="PrimaryDark">#961218</Color>
             <Color x:Key="Text">#232323</Color>
             <Color x:Key="TextDescription">#212121</Color>
+            <Color x:Key="Accent">#ffbf00</Color>
+            
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{StaticResource Text}"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -30,6 +32,35 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+
+            <Style TargetType="Entry">
+                
+                <Setter Property="TextColor" Value="{StaticResource Text}"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates" >
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="LightGray"></Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}"></Setter>
+                                    <Setter Property="TextColor" Value="{StaticResource Accent}"></Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Text}"/>
+            </Style>
+
         </ResourceDictionary>        
     </Application.Resources>
 </Application>

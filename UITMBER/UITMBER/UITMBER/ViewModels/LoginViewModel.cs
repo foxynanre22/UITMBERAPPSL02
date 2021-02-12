@@ -9,11 +9,8 @@ namespace UITMBER.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-       public Image BackgroundImage = new Image {
-            Source = "background.jpg",
-            Opacity = 0.5f
-        };
-    private string email;
+
+        private string email;
         public string Email
         {
             get => email;
@@ -28,7 +25,7 @@ namespace UITMBER.ViewModels
         }
 
         AuthenticationService authenticationService => new AuthenticationService();
-        
+
         public Command LoginCommand { get; }
         public Command RegisterCommand { get; }
         public Command RecoverCommand { get; }
@@ -39,12 +36,16 @@ namespace UITMBER.ViewModels
             LoginCommand = new Command(OnLoginClicked);
             RegisterCommand = new Command(OnRegisterClicked);
             RecoverCommand = new Command(OnRecoverClicked);
+
+            Email = "test2@test.pl";
+            Password = "Sm1shn3";
+
         }
 
         private async void OnRecoverClicked(object obj)
         {
             await Shell.Current.GoToAsync("//RecoverAccountPage");
-            
+
         }
 
         private async void OnRegisterClicked(object obj)
@@ -54,13 +55,33 @@ namespace UITMBER.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            await authenticationService.Authenticate(new Models.Authentication.AuthenticationRequest
+            if (IsBusy)
+                return;
+
+
+            IsBusy = true;
+
+            try
             {
-                Login = email,
-                Password = password
-            });
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+
+
+                await authenticationService.Authenticate(new Models.Authentication.AuthenticationRequest
+                {
+                    Login = email,
+                    Password = password
+                });
+                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+            }
+            catch (Exception ex)
+            {
+
+                //Error handlig
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

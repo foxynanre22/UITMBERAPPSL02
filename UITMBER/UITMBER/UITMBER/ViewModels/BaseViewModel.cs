@@ -7,11 +7,30 @@ using Xamarin.Forms;
 
 using UITMBER.Models;
 using UITMBER.Services;
+using UITMBER.Services.Authentication;
+using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace UITMBER.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+
+        public IAuthenticationService AuthService => DependencyService.Get<IAuthenticationService>();
+
+        public ICommand LogOutCommand => new Command(async () => await OnLogutAsync());
+
+        private async Task OnLogutAsync()
+        {
+            Settings.AccessToken = "";
+            Settings.Name = "";
+            Settings.Photo = "";
+            Settings.Roles = "";
+            Settings.TokenExpire = DateTime.MinValue;
+
+            await Shell.Current.GoToAsync($"//{nameof(Views.LoginPage)}");
+        }
+
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
         bool isBusy = false;

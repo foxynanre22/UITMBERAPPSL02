@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:UITMBER.ViewModels"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+                    Shell.NavBarIsVisible="False"
              x:Class="UITMBER.Views.MainPage">
     <ContentPage.BindingContext>
         <vm:MainViewModel />
@@ -15,12 +16,12 @@
                     Content="{Binding MapControl}"
                 ></ContentView>
 
-            <Button Text="RUN" 
+            <Button Text="LOGOOF" 
                     HeightRequest="50"
                     WidthRequest="50"
                     HorizontalOptions="Start"
                     VerticalOptions="End"
-                    Command="{Binding ActionCommand}" 
+                    Command="{Binding LogOutCommand}" 
                 ></Button>
 
 

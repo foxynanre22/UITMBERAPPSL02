@@ -7,104 +7,119 @@
              xmlns:local="clr-namespace:UITMBER.Views"
              mc:Ignorable="d"
              x:Class="UITMBER.Views.LoginPage"
+             BackgroundColor="LightGray"
              Shell.NavBarIsVisible="False"
-             BackgroundImage="background.jpg"
              >
-    
+
     <ContentPage.Resources>
-    <Style x:Key="LabelStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Text}" />
-    </Style>
-
-    <Style x:Key="EntryStyle" TargetType="Entry">
-            <Setter Property="PlaceholderColor" Value="{StaticResource TextDescription}" />
+        <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource Text}" />
-    </Style>
+        </Style>
 
-    <Style x:Key="LabelInGridStyle" TargetType="Label">
+
+        <Style x:Key="LabelInGridStyle" TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource Text}" />
             <Setter Property="Grid.ColumnSpan" Value="2" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="FontSize" Value="Subtitle" />
-    </Style>
+        </Style>
 
-    <Style x:Key="ButtonInGridStyle" TargetType="Button">
+        <Style x:Key="ButtonInGridStyle" TargetType="Button">
             <Setter Property="Grid.ColumnSpan" Value="2" />
             <Setter Property="HeightRequest" Value="50" />
             <Setter Property="WidthRequest" Value="200" />
             <Setter Property="HorizontalOptions" Value="End" />
             <Setter Property="FontSize" Value="Small" />
             <Setter Property="CornerRadius" Value="25" />
-    </Style>
-    </ContentPage.Resources>    
+
+        
+            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BorderWidth" Value="1"/>
+
+        </Style>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <vm:LoginViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout Padding="0,30,0,30" VerticalOptions="End">
-            <Image Source="logo.png"
+        <Grid>
+            <StackLayout Padding="0,30,0,30" VerticalOptions="End">
+                <Image Source="logo.png"
                    Aspect="AspectFit" 
                    VerticalOptions="Start"/>
-            
-            <Frame CornerRadius="25" Opacity="0.7" Margin="0,80,0,0">
-                <StackLayout VerticalOptions="Center">
-                    <Label Text="Użytkownik" 
+
+                <Frame CornerRadius="25"  Margin="0,80,0,0">
+                    <StackLayout VerticalOptions="Center">
+                        <Label Text="Użytkownik" 
                            FontSize="Title"
                            Style="{StaticResource LabelStyle}"></Label>
 
-                    <Entry Placeholder="Email" 
+                        <Entry Placeholder="Email" 
                            MaxLength="128" 
                            Text="{Binding Email}"  
                            ReturnType="Next"
-                           x:Name="email"
-                           Style="{StaticResource EntryStyle}">
-                        <Entry.Behaviors>
-                            <local:EntryFocusBehavior NextFocusElementName="haslo"/>
-                        </Entry.Behaviors>
-                    </Entry>
-            
-                    <Label Text="Hasło"  
+                           x:Name="email">
+                            <Entry.Behaviors>
+                                <local:EntryFocusBehavior NextFocusElementName="haslo"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Text="Hasło"  
                            FontSize="Title"
                            Style="{StaticResource LabelStyle}"></Label>
-            
-                    <Entry Placeholder="Hasło" 
+
+                        <Entry Placeholder="Hasło" 
                            IsPassword="True" 
                            MaxLength="16" 
                            Text="{Binding Password}" 
                            x:Name="haslo"
-                           ReturnType="Done"
-                           Style="{StaticResource EntryStyle}"/>
+                           ReturnType="Done"/>
 
-                    <Grid Opacity="0.95">
-                        <Label Text="Nie pamiętasz hasła?" 
+                        <Grid Opacity="0.95">
+                            <Label Text="Nie pamiętasz hasła?" 
                                Grid.Row="0"
                                Style="{StaticResource LabelInGridStyle}"></Label>
 
-                        <Button Text="Odzyskaj konto" 
+                            <Button Text="Odzyskaj konto" 
                                 Grid.Row="0" 
+                                BackgroundColor="White"
                                 Style="{StaticResource ButtonInGridStyle}"
                                 Command="{Binding RecoverCommand}"></Button>
 
-                        <Label Text="Nie posiadasz konta?" 
+                            <Label Text="Nie posiadasz konta?" 
                                Grid.Row="1" 
                                Style="{StaticResource LabelInGridStyle}"></Label>
 
-                        <Button Text="Zarejestruj się" 
+                            <Button Text="Zarejestruj się" 
                                 Grid.Row="1" 
+                                BackgroundColor="White"
                                 Style="{StaticResource ButtonInGridStyle}"
                                 Command="{Binding RegisterCommand}"></Button>
-                    </Grid>
+                        </Grid>
 
                         <Button VerticalOptions="End" 
                             Text="Zaloguj się" 
                             Command="{Binding LoginCommand}"  
-                            CornerRadius="25"
-                            BackgroundColor="{StaticResource PrimaryDark}"/>
+                            CornerRadius="25"/>
 
-                </StackLayout>
-            </Frame>
-        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <Grid IsVisible="{Binding IsBusy}" BackgroundColor="#55000000" >
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               Color="{StaticResource Accent}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               ></ActivityIndicator>
+
+            </Grid>
+
+         
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
