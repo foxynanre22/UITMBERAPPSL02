@@ -3,35 +3,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:UITMBER.Extentions"
              x:Class="UITMBER.Views.NewCarPage"
              Shell.PresentationMode="ModalAnimated"
-             Title="New Car Page">
+             Title="New Car Page"
+             BackgroundColor="LightGray">
     <ContentPage.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+            <Setter Property="BackgroundColor" Value="White" />
+        </Style>
+
+        <Style x:Key="LabelInGridStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="Subtitle" />
+        </Style>
+
+        <Style x:Key="ButtonInGridStyle" TargetType="Button">
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="200" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="FontSize" Value="Small" />
+            
+            <Setter Property="CornerRadius" Value="25" />
+            
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BorderWidth" Value="1"/>
+
+        </Style>
         <ResourceDictionary>
             <converters:IntEnumConverter x:Key="IntEnum"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        
-        <StackLayout Spacing="3" Padding="15">
-            <Label Text="Photo" FontSize="Medium" />
-            <Entry Text="{Binding Photo, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Model" FontSize="Medium" />
-            <Entry Text="{Binding Model, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Color" FontSize="Medium" />
-            <Entry Text="{Binding Color, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Manufacturer" FontSize="Medium" />
-            <Entry Text="{Binding Manufacturer, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="PlateNo" FontSize="Medium" />
-            <Entry Text="{Binding PlateNo, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="UserId" FontSize="Medium" />
-            <Entry Text="{Binding UserId, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Year" FontSize="Medium" />
-            <Entry Text="{Binding Year, Mode=TwoWay}" FontSize="Medium" />
+        <Frame  Padding="10">
+        <StackLayout Spacing="3" >
+            
+            <Label Text="Photo" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding Photo, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}" />
+            <Label Text="Model" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding Model, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}" />
+            <Label Text="Color" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding Color, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}"  />
+            <Label Text="Manufacturer" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding Manufacturer, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}"  />
+            <Label Text="PlateNo" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding PlateNo, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}"  />
+            <Label Text="UserId" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding UserId, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}"  />
+            <Label Text="Year" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                <Entry Text="{Binding Year, Mode=TwoWay}" FontSize="Medium" Style="{StaticResource EntryStyle}"  />
             <Picker ItemsSource="{Binding CarsNames}" SelectedIndex="{Binding Type, Converter={StaticResource IntEnum}}"/>
             <StackLayout Orientation="Horizontal">
-                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" 
+                        BackgroundColor="White" Style="{StaticResource ButtonInGridStyle}"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" 
+                        Style="{StaticResource ButtonInGridStyle}" ></Button>
             </StackLayout>
+            
         </StackLayout>
+        </Frame>
     </ContentPage.Content>
 
 </ContentPage>
