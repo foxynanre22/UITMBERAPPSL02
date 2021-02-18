@@ -2,7 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UITMBER.Views.MyApplicationPage"
-             xmlns:local="clr-namespace:UITMBER.ViewModels">
+             xmlns:local="clr-namespace:UITMBER.ViewModels"
+             BackgroundColor="LightGray">
+    <ContentPage.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+            
+        </Style>
+
+
+        <Style x:Key="LabelInGridStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Text}" />
+            
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="Subtitle" />
+        </Style>
+
+        <Style x:Key="ButtonInGridStyle" TargetType="Button">
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="End"/>
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="WidthRequest" Value="300" />
+             
+            <Setter Property="Padding" Value="5" />
+
+            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BorderWidth" Value="1"/>
+
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="My Cars" Command="{Binding MyCarsCommand}" />
     </ContentPage.ToolbarItems>
@@ -11,22 +42,29 @@
             <ScrollView>
             <StackLayout Spacing="20" Padding="15" HorizontalOptions = "Center">
                     <Image Source="{Binding DriverLicencePhoto}" HeightRequest="300" />
-                    <Grid >
+                    <Frame CornerRadius="25"  Margin="0,70,0,0">
+                        <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40" />
                             <RowDefinition Height="40" />
                             <RowDefinition Height="40" />
-                            <RowDefinition Height="40" />
+                            <RowDefinition Height="60" />
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="0" Text="Numer licenzji:" FontAttributes="Bold" FontSize="Large" />
-                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding DriverLicenceNo}" FontSize="Medium"/>
-                        <Label Grid.Column="0" Grid.Row="1" Text="Status:" FontAttributes="Bold" FontSize="Large" />
-                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Accepted}" FontSize="Medium"/>
-                        <Label Grid.Column="0" Grid.Row="2" Text="Data:" FontAttributes="Bold" FontSize="Large" />
-                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Date}" FontSize="Medium"/>
-                        <Button Grid.ColumnSpan="2" Grid.Row= "3" Text= "Wyślij aplikację" IsVisible= "{Binding SendApplicationVisible}" Command= "{Binding SendApplicationCommand}"></Button>
+
+
+                            <Label Grid.Column="0" Grid.Row="0" Text="Numer licenzji:" FontAttributes="Bold" FontSize="Title"  Style="{StaticResource LabelStyle}"  />
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding DriverLicenceNo}" FontSize="Medium "  Style="{StaticResource LabelInGridStyle}"/>
+                                <Label Grid.Column="0" Grid.Row="1" Text="Status:" FontAttributes="Bold" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Accepted}" FontSize="Medium" Style="{StaticResource LabelInGridStyle}"/>
+                                <Label Grid.Column="0" Grid.Row="2" Text="Data:" FontAttributes="Bold" FontSize="Title" Style="{StaticResource LabelStyle}" />
+                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding Date}" FontSize="Medium" Style="{StaticResource LabelInGridStyle}"/>
+                                <Button  Grid.Row= "3" Text= "Wyślij aplikację" IsVisible= "{Binding SendApplicationVisible}" Command= "{Binding SendApplicationCommand}" BackgroundColor="White"
+                                Style="{StaticResource ButtonInGridStyle}"></Button>
+                        
+                        
                     </Grid>
+                    </Frame>
                 </StackLayout>
         </ScrollView>
         </RefreshView>

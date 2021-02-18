@@ -101,7 +101,7 @@ namespace UITMBER.ViewModels
 
         public async void LoadItemId(string ItemIdC)
         {
-            int x = Int32.Parse(ItemIdC);
+            long x = Int64.Parse(ItemIdC);
             try
             {
                     var items = await _CarService.GetMyCars(); 
