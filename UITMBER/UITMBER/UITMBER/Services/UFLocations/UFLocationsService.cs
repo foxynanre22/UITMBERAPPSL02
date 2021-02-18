@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace UITMBER.Services.UFLocations
 {
-    class UFLocationsService : IUFLocationsService
+    public class UFLocationsService : IUFLocationsService
     {
         private IRequestService _requestService => DependencyService.Get<IRequestService>();
         public async Task<bool> AddLocations(LocationDto LoDto)
