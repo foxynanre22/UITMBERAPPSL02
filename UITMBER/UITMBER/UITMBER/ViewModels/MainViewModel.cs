@@ -67,13 +67,27 @@ namespace UITMBER.ViewModels
                 {
 
 
-                    var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(e.Point.Latitude, e.Point.Longitude), Xamarin.Forms.GoogleMaps.Distance.FromKilometers(1));
+                    var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(
+                        new Xamarin.Forms.GoogleMaps.Position(e.Point.Latitude, e.Point.Longitude), 
+                        Xamarin.Forms.GoogleMaps.Distance.FromKilometers(1));
 
                     MapControl.MoveToRegion(mapSpan);
 
                     //Location Geocoding
                     var locations = await Geocoding.GetPlacemarksAsync(new Location(e.Point.Latitude, e.Point.Longitude));
                     var locationDecoded = locations?.FirstOrDefault();
+
+
+                    //Pobieranie lokalizacji z adresu (tekstu)
+                    //var loactionsFromAddress = await Geocoding.GetLocationsAsync("Paderewskiego");
+                    //var loactionFromAddress = loactionsFromAddress?.FirstOrDefault();
+                    //var mapSpan = Xamarin.Forms.GoogleMaps.MapSpan.FromCenterAndRadius(
+                    //   new Xamarin.Forms.GoogleMaps.Position(loactionFromAddress.Latitude, loactionFromAddress.Longitude),
+                    //   Xamarin.Forms.GoogleMaps.Distance.FromKilometers(1));
+
+                    //MapControl.MoveToRegion(mapSpan);
+
+                    //return;
 
                     //Setting Pin
                     if (OrderStateEnum == OrderStateEnum.StartPicker)
@@ -229,7 +243,9 @@ namespace UITMBER.ViewModels
 
             if (PageStatusEnum == PageStatusEnum.Default)
             {
-
+               MapControl.Polylines.Clear();
+                MapControl.Pins.Clear();
+                GetMyCurrentLocation();
             }
             else if (PageStatusEnum == PageStatusEnum.Searching)
             {
@@ -366,7 +382,10 @@ namespace UITMBER.ViewModels
             try
             {
 
-                var distance = Location.CalculateDistance(new Location(_startLocation.Latitude, _startLocation.Longitude), new Location(_destinationLocation.Latitude, _destinationLocation.Longitude), DistanceUnits.Kilometers);
+                var distance = Location.CalculateDistance(
+                    new Location(_startLocation.Latitude, _startLocation.Longitude),
+                    new Location(_destinationLocation.Latitude, _destinationLocation.Longitude),
+                    DistanceUnits.Kilometers);
                 DrawRoute(_startLocation, _destinationLocation);
                 PageStatusEnum = PageStatusEnum.ShowingRoute;
 
@@ -397,7 +416,9 @@ namespace UITMBER.ViewModels
 
 
             MapControl.Polylines.Add(polyline);
-            MapControl.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.50f)));
+            MapControl.MoveToRegion(MapSpan.FromPositions(polyline.Positions));
+
+
             {
                 var pin = new Xamarin.Forms.GoogleMaps.Pin
                 {
